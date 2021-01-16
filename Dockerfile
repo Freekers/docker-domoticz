@@ -1,4 +1,4 @@
-FROM linuxserver/domoticz:latest
+FROM linuxserver/domoticz:version-2020.2
 
 RUN apt-get update && \
     apt-get -y upgrade && \
