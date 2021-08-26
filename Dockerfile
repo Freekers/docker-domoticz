@@ -1,23 +1,20 @@
-FROM ghcr.io/linuxserver/domoticz:latest
+FROM domoticz/domoticz:latest
 
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get -y install --no-install-recommends python3-pip sshpass iputils-ping ffmpeg openssh-client && \
-    apt-get -y install --no-install-recommends python3 python3-dev libffi-dev libssl-dev && \
+    apt-get -y install --no-install-recommends python3 python3-dev python3-pip libffi-dev libssl-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# For Domoticz_iDetect v2
-RUN pip3 install paramiko
-
-# Install Zigbee2MQTT
-COPY ./zigbee2mqtt /opt/domoticz/plugins/zigbee2mqtt
+# Cloning plugins
+COPY ./zigbee2mqtt /opt/domoticz/userdata/plugins/zigbee2mqtt
+COPY ./xiaomi-mirobot /opt/domoticz/userdata/plugins/xiaomi-mirobot
 
 # Install Roborock
-RUN pip3 install -U setuptools && \
-    pip3 install -U virtualenv && \
-    pip3 install wheel
-
-COPY ./xiaomi-mirobot /opt/domoticz/plugins/xiaomi-mirobot
 WORKDIR /opt/domoticz/plugins/xiaomi-mirobot
-RUN pip3 install msgpack-python
+RUN pip install --upgrade pip && \
+    pip3 install -U setuptools && \
+    pip3 install -U virtualenv && \
+    pip3 install wheel && \
+    virtualenv -p python3 .env && \
+    pip3 install msgpack-python
