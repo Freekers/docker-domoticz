@@ -1,8 +1,12 @@
 name: Build and Push Docker Image
-on: push
+on: 
+ push:
+ schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '11 11 1 * *'
 jobs:
   build-container:
-    name: Build container
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
