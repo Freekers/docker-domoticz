@@ -1,3 +1,6 @@
+# DEPRECATION WARNING: This repository is UNMAINTAINED. 
+### I am no longer using Domoticz since I have moved to Home Assistant.
+
 # freekers/docker-domoticz
 
 This is a fork of linuxserver/docker-domoticz with personal customizations: ffmpeg, sshpass and iputils-ping have been added, as well as the python package 'paramiko', to support RTSP streams, “keyboard-interactive” password authentication for use with the iDetect presence detection plugin and iputils-ping for custom watchdog scripts. 
