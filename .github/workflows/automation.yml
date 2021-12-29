@@ -19,4 +19,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ github.run_number }}, latest
+          tags: freekers/docker-domoticz:latest,freekers/docker-domoticz:${{ github.run_number }}
